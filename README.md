@@ -1,1 +1,1 @@
-Career showcase NextJS WebApp
+NextJS career portfolio Webapp.
