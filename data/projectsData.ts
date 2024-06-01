@@ -12,6 +12,12 @@ const projectsData: Project[] = [
     imgSrc: '/static/images/heatmap.png',
     href: 'https://github.com/nfadeluca/homeprices',
   },
+  {
+    title: 'Report Builder',
+    description: `GPT 3.5-turbo AI Powered docx report-builder. Includes text parsing, prompt templating, prompt engineering techniques, custom template creation`,
+    imgSrc: '/static/images/heatmap.png',
+    href: 'https://github.com/nfadeluca/homeprices',
+  },
 ]
 
 export default projectsData
