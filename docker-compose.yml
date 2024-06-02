@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  flask-service:
+    build:
+      context: ./flask-backend
+      dockerfile: ./DockerfileGPT
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./flask-backend/gpt_library/.env
+    volumes:
+      - ./flask-backend:/app
+
+  next-frontend:
+    build:
+      context: ./next-frontend
+      dockerfile: ./DockerfileNext
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./next-frontend:/app
+    environment:
+      - NODE_ENV=development
