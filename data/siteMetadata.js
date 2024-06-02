@@ -6,9 +6,9 @@ const siteMetadata = {
   description: 'A blog created with Next.js and Tailwind.css',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
+  siteUrl: 'https://nickdeluca.com',
   siteRepo: 'https://github.com/nfadeluca/Career-Showcase',
-  siteLogo: '/static/images/logo.png',
+  siteLogo: '',
   email: 'nfadeluca@gmail.com',
   github: 'https://github.com/nfadeluca',
   linkedin: 'https://www.linkedin.com/in/nickdeluca1/',
