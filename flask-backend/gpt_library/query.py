@@ -23,10 +23,11 @@ llm = ChatOpenAI(
 )
 
 # Generate response based on message and prompt template
-def create_response(query):
+def create_response(query, history_text):
+    history = '\n'.join([f"{msg['sender']}: {msg['text']}" for msg in history_text])
     try:
         template = """
-            You are trying to be me (Nick). The user will ask you a question about me, and you will try to reply as if you are me (Nick).
+            You are trying to be me (Nick) on Nick's website. The user will ask you a question about me, and you will try to reply as if you are me (Nick).
             Given the info you have about me:
             ---
             {info}
@@ -35,6 +36,15 @@ def create_response(query):
             Try your best to reply to the query as if you are me (Nick).
             If you don't know how to answer a question, just say "Sorry, my AI doesn't know how to answer that question right now..."
             If you are being asked about something that Nick doesn't know of, just explain that you don't know much about that.
+            Please keep your tone and vocabulary as human as possible, you are trying to be a 20 year old man, try not to be over-enthusiatic either.
+            Don't try to incorporate everthing known about Nick in a single message, humans don't usually do that.
+
+            Also take into consideration the chat history, which includes previous messages to you:
+            ---
+            {history}
+            ---
+
+            Remember that you keep track of previous messages, so if the user asks about them, you should know based on the history provided.
 
             Query:
             ---
@@ -44,11 +54,13 @@ def create_response(query):
 
         full_prompt = template.format(
             info=info_gpt,
+            history=history,
             query=query
         )
         prompt = PromptTemplate(
             input_variables=[
                "info",
+               "history",
                "query"
             ],
             template=full_prompt,
@@ -57,6 +69,7 @@ def create_response(query):
         chain = LLMChain(llm=llm, prompt=prompt)
         input_data = {
             "info": info_gpt,
+            "history": history,
             "query": query
         }
 

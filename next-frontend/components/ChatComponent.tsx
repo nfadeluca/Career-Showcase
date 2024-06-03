@@ -4,8 +4,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { animateScroll } from 'react-scroll'
 
+type Message = { sender: 'user' | 'ai'; text: string }
+
 const ChatComponent: React.FC = () => {
-  const [messages, setMessages] = useState<{ sender: 'user' | 'ai'; text: string }[]>([
+  const [messages, setMessages] = useState<Message[]>([
     {
       sender: 'ai',
       text: "Hello! I'm an AI meant to simulate Nick. I'm powered by the GPT API. How can I help you today?",
@@ -17,23 +19,25 @@ const ChatComponent: React.FC = () => {
   const handleSendMessage = async () => {
     if (input.trim() === '') return
 
-    const userMessage = { sender: 'user', text: input }
-    setMessages([...messages, userMessage])
+    const userMessage: Message = { sender: 'user', text: input }
+    const newMessages = [...messages, userMessage]
+    setMessages(newMessages)
     setInput('')
 
     try {
       const response = await axios.post('http://localhost:5000/api/ask_nick', {
         query: input,
+        history: newMessages,
       })
-      const aiMessage = { sender: 'ai', text: response.data.response }
-      setMessages([...messages, userMessage, aiMessage])
+      const aiMessage: Message = { sender: 'ai', text: response.data.response }
+      setMessages([...newMessages, aiMessage])
     } catch (error) {
       console.error('Error fetching response from API:', error)
-      const errorMessage = {
+      const errorMessage: Message = {
         sender: 'ai',
         text: 'Sorry, there was an error processing your request.',
       }
-      setMessages([...messages, userMessage, errorMessage])
+      setMessages([...newMessages, errorMessage])
     }
   }
 
@@ -58,11 +62,10 @@ const ChatComponent: React.FC = () => {
               className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'} mb-2`}
             >
               <div
-                className={`max-w-xs rounded-lg px-4 py-2 ${
-                  message.sender === 'user'
+                className={`max-w-xs rounded-lg px-4 py-2 ${message.sender === 'user'
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-200 text-black dark:bg-gray-700 dark:text-white'
-                }`}
+                  }`}
               >
                 {message.text}
               </div>

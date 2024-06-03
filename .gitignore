@@ -15,6 +15,7 @@ node_modules
 
 # next.js
 /.next/
+next-frontend/.next/*
 /out/
 public/sitemap.xml
 .vercel

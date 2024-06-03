@@ -10,9 +10,6 @@ const projectsData: Project[] = [
     title: 'Home Prices',
     description: `Heatmap displaying prices of single-family homes across the USA using Zillow data. Friend & I thought it would be a good idea to work on during our Sophomore year.`,
     imgSrcs: [
-      '/static/images/projects/heatmap1.png',
-      '/static/images/projects/heatmap2.png',
-      '/static/images/projects/heatmap3.png',
       '/static/images/projects/gifs/heatmap_demo.gif',
     ],
     href: 'https://github.com/nfadeluca/homeprices',

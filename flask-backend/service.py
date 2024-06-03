@@ -12,11 +12,12 @@ def ask_nick():
     try:
         data = request.get_json()
         query = data.get('query', '')
+        history = data.get('history', [])
 
         if not query:
             return jsonify({'error': 'No query provided'}), 400
 
-        response = create_response(query)
+        response = create_response(query, history)
         return jsonify({'response': response})
 
     except Exception as e:
