@@ -16,7 +16,8 @@ module.exports = {
     'plugin:prettier/recommended',
     'next',
     'next/core-web-vitals',
-  ],
+    process.env.DISABLE_PRETTIER ? null : 'plugin:prettier/recommended',
+  ].filter(Boolean),
   parserOptions: {
     project: true,
     tsconfigRootDir: __dirname,
@@ -38,5 +39,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    'prettier/prettier': process.env.DISABLE_PRETTIER ? 'off' : 'error',
   },
 }

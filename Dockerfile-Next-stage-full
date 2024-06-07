@@ -1,0 +1,41 @@
+# Stage 1: Build the application
+FROM node:18-alpine AS builder
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and yarn.lock files
+COPY ./next-frontend/package.json ./next-frontend/yarn.lock ./
+
+# Install dependencies
+RUN yarn install
+
+# Copy the rest of the application code
+COPY ./next-frontend .
+
+# Set environment variable to disable Prettier
+ENV DISABLE_PRETTIER=true
+
+# Build the application
+RUN yarn build
+
+# Stage 2: Serve the application
+FROM node:18-alpine
+
+# Set environment variables
+ENV NODE_ENV=production
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only the necessary files from the build stage
+COPY --from=builder /app .
+
+# Install only production dependencies using npm
+RUN npm install --omit=dev
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD ["npm", "start"]

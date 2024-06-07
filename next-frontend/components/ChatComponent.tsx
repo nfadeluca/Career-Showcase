@@ -25,7 +25,7 @@ const ChatComponent: React.FC = () => {
     setInput('')
 
     try {
-      const response = await axios.post('http://localhost:5000/api/ask_nick', {
+      const response = await axios.post('http://localhost/api/ask_nick', {
         query: input,
         history: newMessages,
       })

@@ -1,24 +1,36 @@
 version: '3.8'
 
 services:
-  flask-service:
+  backend-flask:
     build:
-      context: ./flask-backend
+      context: .
       dockerfile: ./DockerfileGPT
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
     env_file:
       - ./flask-backend/gpt_library/.env
     volumes:
       - ./flask-backend:/app
 
-  next-frontend:
+  frontend-next:
     build:
-      context: ./next-frontend
+      context: .
       dockerfile: ./DockerfileNext
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     volumes:
       - ./next-frontend:/app
     environment:
       - NODE_ENV=development
+
+  nginx-reverse-proxy:
+      build:
+        context: .
+        dockerfile: ./Dockerfile-nginx-reverse-proxy
+      ports:
+        - "80:80"
+        - "443:443"
+      depends_on:
+        - backend-flask
+        - frontend-next
+      restart: always

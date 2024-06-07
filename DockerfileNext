@@ -8,7 +8,7 @@ ENV NODE_ENV=development
 WORKDIR /app
 
 # Copy package.json and yarn.lock files
-COPY package.json yarn.lock ./
+COPY ./next-frontend/package.json ./next-frontend/yarn.lock ./
 
 RUN npm install
 
@@ -16,7 +16,7 @@ RUN npm install
 RUN yarn install
 
 # Copy the rest of the application code
-COPY . .
+COPY ./next-frontend .
 
 # Expose the port the app runs on
 EXPOSE 3000
