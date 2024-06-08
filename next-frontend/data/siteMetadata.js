@@ -1,9 +1,9 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Career Portfolio',
+  title: 'Portfolio',
   author: 'Nick De Luca',
   headerTitle: 'Nick De Luca',
-  description: 'A blog created with Next.js and Tailwind.css',
+  description: "Nick's portfolio and blog",
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://nickdeluca.net',
