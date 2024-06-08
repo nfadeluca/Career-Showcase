@@ -28,7 +28,8 @@ services:
     expose:
       - "3000"
     volumes:
-      - ./next-frontend:/app
+      - ./next-frontend:/app:delegated
+      - /app/node_modules
     environment:
       - NODE_ENV=development
 
