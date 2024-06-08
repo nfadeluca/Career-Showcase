@@ -22,20 +22,17 @@ RUN yarn build
 # Stage 2: Serve the application
 FROM node:18-alpine
 
-# Set environment variables
-ENV NODE_ENV=production
-
 # Set the working directory
 WORKDIR /app
 
 # Copy only the necessary files from the build stage
 COPY --from=builder /app .
 
-# Install only production dependencies using npm
-RUN npm install --omit=dev
+# Install only production dependencies using yarn
+RUN yarn install
 
 # Expose the port the app runs on
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

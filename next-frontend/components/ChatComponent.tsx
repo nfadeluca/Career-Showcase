@@ -25,12 +25,12 @@ const ChatComponent: React.FC = () => {
     setInput('')
 
     try {
-      const response = await axios.post('http://localhost/api/ask_nick', {
+      const response = await axios.post(`/backend-flask/api/ask_nick`, {
         query: input,
         history: newMessages,
-      })
-      const aiMessage: Message = { sender: 'ai', text: response.data.response }
-      setMessages([...newMessages, aiMessage])
+      });
+      const aiMessage: Message = { sender: 'ai', text: response.data.response };
+      setMessages([...newMessages, aiMessage]);
     } catch (error) {
       console.error('Error fetching response from API:', error)
       const errorMessage: Message = {
@@ -63,8 +63,8 @@ const ChatComponent: React.FC = () => {
             >
               <div
                 className={`max-w-xs rounded-lg px-4 py-2 ${message.sender === 'user'
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-200 text-black dark:bg-gray-700 dark:text-white'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 text-black dark:bg-gray-700 dark:text-white'
                   }`}
               >
                 {message.text}
