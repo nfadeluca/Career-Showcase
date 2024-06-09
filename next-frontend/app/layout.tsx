@@ -1,6 +1,5 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
-
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
@@ -10,6 +9,7 @@ import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -52,6 +52,10 @@ export const metadata: Metadata = {
   },
 }
 
+const DynamicPageTransition = dynamic(() => import('@/components/PageTransition'), {
+  ssr: false,
+})
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -73,7 +77,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex h-screen flex-col justify-between font-sans">
               <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                 <Header />
-                <main className="mb-auto">{children}</main>
+                <main className="flex-1 mb-auto">
+                  <DynamicPageTransition>{children}</DynamicPageTransition>
+                </main>
               </SearchProvider>
               <Footer />
             </div>
