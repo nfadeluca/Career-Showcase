@@ -28,6 +28,15 @@ module.exports = {
         primary: colors.pink,
         gray: colors.gray,
       },
+      animation: {
+        'pulsate': 'pulsate 1.5s ease-in-out infinite',
+      },
+      keyframes: {
+        pulsate: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.5 },
+        },
+      },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {

@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className="flex items-center justify-between py-10">
       <div>
-        <Link href="/" aria-label={siteMetadata.headerTitle} className="transform transition duration-200 hover:scale-105 hover:text-blue-500 active:scale-95 active:text-blue-700">
+        <Link href="/" aria-label={siteMetadata.headerTitle} className="transform transition duration-200 hover:scale-105 hover:text-primary-500 dark:hover:text-primary-500 active:scale-95 active:text-primary-700">
           <div className="flex items-center justify-between">
             <div className="mr-3">{/* <Logo /> */}</div>
             {typeof siteMetadata.headerTitle === 'string' ? (
@@ -29,7 +29,7 @@ const Header = () => {
             <Link
               key={link.title}
               href={link.href}
-              className={`hidden font-medium sm:block transform transition duration-200 hover:scale-105 hover:text-blue-500 active:scale-95 active:text-blue-700 ${index === arr.length - 1 ? 'text-blue-500 animate-pulsate' : 'text-gray-900 dark:text-gray-100'
+              className={`hidden font-medium sm:block transform transition duration-200 hover:scale-105 hover:text-primary-500 dark:hover:text-primary-500 active:scale-95 active:text-primary-700 ${index === arr.length - 1 ? 'text-primary-600 animate-pulsate' : 'text-gray-900 dark:text-gray-100'
                 }`}
             >
               {link.title}
