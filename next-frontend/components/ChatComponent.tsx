@@ -5,12 +5,12 @@ import axios from 'axios'
 import { animateScroll } from 'react-scroll'
 import AnimatedImageComponent from './AnimatedImageComponent'
 
-type Message = { sender: 'user' | 'ai'; text: string }
+type Message = { sender: 'user' | 'Nick'; text: string }
 
 const ChatComponent: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
-      sender: 'ai',
+      sender: 'Nick',
       text: "Hello! I'm an AI meant to simulate Nick. I'm powered by the GPT API. How can I help you today?",
     },
   ])
@@ -31,13 +31,13 @@ const ChatComponent: React.FC = () => {
         query: input,
         history: newMessages,
       })
-      const aiMessage: Message = { sender: 'ai', text: response.data.response }
+      const aiMessage: Message = { sender: 'Nick', text: response.data.response }
       setMessages([...newMessages, aiMessage])
       setTriggerImageChange(true)
     } catch (error) {
       console.error('Error fetching response from API:', error)
       const errorMessage: Message = {
-        sender: 'ai',
+        sender: 'Nick',
         text: 'Sorry, there was an error processing your request.',
       }
       setMessages([...newMessages, errorMessage])

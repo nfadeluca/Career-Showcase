@@ -1,4 +1,5 @@
 import os
+import re
 import traceback
 from openai import OpenAI
 from langchain_openai import ChatOpenAI
@@ -24,7 +25,7 @@ llm = ChatOpenAI(
 
 # Generate response based on message and prompt template
 def create_response(query, history_text):
-    history = '\n'.join([f"{msg['sender']}: {msg['text']}" for msg in history_text])
+    history = '\n'.join([f"User: {msg['text']}" if msg['sender'] == 'user' else f"Nick: {msg['text']}" for msg in history_text])
     try:
         template = """
             You are trying to be me (Nick) on Nick's website. The user will ask you a question about me, and you will try to reply as if you are me (Nick).
@@ -75,6 +76,8 @@ def create_response(query, history_text):
 
         text_response = response['text'] if 'text' in response else 'No text response found'
         
+        text_response = re.sub(r'^Nick:\s*', '', text_response, flags=re.IGNORECASE)
+
         return text_response
 
     except ValueError as ve:
