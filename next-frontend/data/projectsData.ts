@@ -16,9 +16,10 @@ const projectsData: Project[] = [
   },
   {
     title: 'Report Builder',
-    description: `GPT 3.5-turbo AI Powered docx report-builder. Includes text parsing, prompt templating, prompt engineering techniques, custom template creation, and much more. 
-                  Also uses vector data stores with use of RAG method to simulate superior context and data fetching. \n
-                  Unfortunately I can't post images of this one or link the repository as it's largely confidential, but feel free to ask me about it!`,
+    description: `
+      I've been working on an AI-Powered DOCX Report Builder that leverages a powerful Large Language Model (LLM) to transform document creation. It features advanced text parsing, prompt engineering, and custom templates for high-quality reports. Using vector data stores and the Retrieval-Augmented Generation (RAG) method, it ensures superior context and precise data fetching. A Python backend handles communication with the LLM API, enhancing efficiency.
+      Integrated with a full-stack web application, it seamlessly connects with CRM components, boosting productivity. Managed via Azure DevOps, it has a streamlined pipeline for staging and production, enabling continuous integration, smooth updates, and reliable deployment.
+      Designed for scalability, it adapts to various business needs, generating detailed financial reports, market analyses, and customized documents. Unfortunately, I can't share images or the repository due to confidentiality, but feel free to ask me about it!`,
     imgSrcs: [],
     href: '',
   },
