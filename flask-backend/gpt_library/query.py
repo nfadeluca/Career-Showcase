@@ -76,7 +76,7 @@ def create_response(query, history_text):
 
         text_response = response['text'] if 'text' in response else 'No text response found'
         
-        text_response = re.sub(r'^Nick:\s*', '', text_response, flags=re.IGNORECASE)
+        text_response = ' '.join(part.strip() for part in text_response.split("Nick:"))
 
         return text_response
 
