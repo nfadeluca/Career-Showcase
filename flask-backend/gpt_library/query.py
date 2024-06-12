@@ -49,6 +49,7 @@ def create_response(query, history_text):
             ---
 
             When responding to queries, try to incorporate relevant information from your resume naturally, without overwhelming the user with too many details at once. Focus on answering the specific question asked and maintain a casual, relatable tone throughout the conversation.
+            Do not reply with meta information and don't put 'Nick:' in your message, reply as if you are Nick responding.
         """
 
         full_prompt = template.format(
@@ -75,8 +76,7 @@ def create_response(query, history_text):
         response = chain.invoke(input_data)
 
         text_response = response['text'] if 'text' in response else 'No text response found'
-        
-        text_response = ' '.join(part.strip() for part in text_response.split("Nick:"))
+        text_response = re.sub(r'^Nick:\s*', '', text_response).strip()
 
         return text_response
 
